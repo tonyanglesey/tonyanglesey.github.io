@@ -156,7 +156,7 @@ export const llama = {
 } as const;
 
 export const socials = [
-  { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+  // { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
   { label: "GitHub", value: "@tonyanglesey", href: "https://github.com/tonyanglesey" },
   { label: "LinkedIn", value: "in/tonyanglesey", href: "https://linkedin.com/in/tonyanglesey" },
   { label: "X", value: "@tanglesey", href: "https://x.com/tanglesey" },
