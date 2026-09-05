@@ -7,7 +7,7 @@ export const profile = {
   name: "Tony Anglesey",
   role: "Full-stack developer and UI/UX designer in Chicago and New York.",
   lede:
-    "Twenty years building software that ships. Founder of lla.ma and Zen Fitness, crafting high-performance web and mobile apps that blend clean code with intuitive, user-focused design.",
+    "Over twenty years building software that ships. Founder of lla.ma and Zen Fitness, crafting high-performance web and mobile apps that blend clean code with intuitive, user-focused design.",
   availability: "Available for new work, remote or on-site",
   resumeHref: "/TonyAnglesey-Resume.pdf",
   email: "tony@tonyanglesey.com",
