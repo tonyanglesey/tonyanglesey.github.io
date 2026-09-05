@@ -10,7 +10,7 @@ export const profile = {
     "Over twenty years building software that ships. Founder of lla.ma and Zen Fitness, crafting high-performance web and mobile apps that blend clean code with intuitive, user-focused design.",
   availability: "Available for new work, remote or on-site",
   resumeHref: "/TonyAnglesey-Resume.pdf",
-  email: "tony@tonyanglesey.com",
+  email: "tanglesey@gmail.com",
 } as const;
 
 export const rail = {
