@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tony Anglesey — redesign mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F8;
+  --card:#FFFFFF;
+  --ink:#15202E;
+  --slate:#5D6875;
+  --hair:#E2E5E9;
+  --hair-strong:#CBD1D8;
+  --steel:#1F5C8B;
+  --steel-deep:#16456B;
+  --steel-wash:#EDF3F9;
+  --moss:#5C8A1C;
+  --acid:#C9F04B;
+  --sans:"Instrument Sans",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --page:1180px;
+  --gut:clamp(20px,5vw,56px);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--page);margin:0 auto;padding:0 var(--gut)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--steel);outline-offset:3px;border-radius:2px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,247,248,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--hair);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.mark{display:flex;align-items:baseline;gap:9px;font-weight:600;letter-spacing:-.02em}
+.mark .dot{width:7px;height:7px;border-radius:50%;background:var(--acid);display:inline-block;transform:translateY(-1px)}
+.nav-links{display:flex;gap:30px;font-size:15px;color:var(--slate)}
+.nav-links a{padding:4px 0;border-bottom:1.5px solid transparent}
+.nav-links a:hover{color:var(--ink);border-bottom-color:var(--acid)}
+.nav-links a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
+.nav-cta{
+  font-size:15px;font-weight:500;padding:8px 16px;border-radius:6px;
+  background:var(--steel);color:#fff;border:1px solid var(--steel);
+}
+.nav-cta:hover{background:var(--steel-deep);border-color:var(--steel-deep)}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(64px,11vw,132px) 0 clamp(48px,7vw,88px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,.85fr);gap:clamp(32px,6vw,80px);align-items:end}
+.avail{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:14px;color:var(--slate);margin-bottom:26px;
+}
+.avail i{width:8px;height:8px;border-radius:50%;background:var(--moss);position:relative}
+.avail i::after{
+  content:"";position:absolute;inset:-5px;border-radius:50%;
+  border:1px solid var(--moss);opacity:.35;
+}
+h1{
+  font-size:clamp(3rem,8.2vw,5.9rem);
+  line-height:.94;letter-spacing:-.045em;font-weight:600;
+}
+h1 .role{
+  display:block;font-size:clamp(1.5rem,3.4vw,2.35rem);
+  line-height:1.15;letter-spacing:-.03em;font-weight:400;
+  color:var(--slate);margin-top:22px;max-width:21ch;
+}
+.hero p.lede{
+  margin-top:30px;max-width:52ch;color:var(--slate);font-size:18px;
+}
+.hero p.lede em{font-style:normal;color:var(--ink);font-weight:500}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.btn{
+  font-family:inherit;font-size:16px;font-weight:500;
+  padding:13px 22px;border-radius:7px;border:1px solid var(--steel);
+  background:var(--steel);color:#fff;cursor:pointer;transition:background .16s ease,border-color .16s ease;
+}
+.btn:hover{background:var(--steel-deep);border-color:var(--steel-deep)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--hair-strong)}
+.btn.ghost:hover{border-color:var(--steel);color:var(--steel);background:var(--steel-wash)}
+
+/* right rail */
+.rail{border-left:1px solid var(--hair);padding-left:clamp(20px,3vw,34px)}
+.rail dl{display:grid;gap:20px}
+.rail dt{font-size:13px;color:var(--slate);margin-bottom:3px}
+.rail dd{font-size:15px;font-weight:500;line-height:1.4}
+.rail dd span{display:block;font-weight:400;color:var(--slate);font-size:14px}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.stack span{
+  font-size:12.5px;padding:3px 9px;border-radius:20px;
+  background:#EEF1F3;color:#3C4753;font-weight:400;
+}
+.stack span.hi{background:var(--acid);color:#2E3D08}
+
+/* ---------- section frame ---------- */
+section.band{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--hair)}
+.head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:44px;flex-wrap:wrap}
+h2{font-size:clamp(1.7rem,3.6vw,2.5rem);letter-spacing:-.035em;font-weight:600;line-height:1.1}
+.head p{color:var(--slate);font-size:16px;max-width:38ch}
+
+/* ---------- work index ---------- */
+.index{border-top:1px solid var(--hair-strong)}
+.row{
+  display:grid;
+  grid-template-columns:minmax(0,3.1fr) minmax(0,2fr) minmax(0,1.5fr) 62px;
+  gap:24px;align-items:center;
+  padding:26px 4px;border-bottom:1px solid var(--hair);
+  position:relative;transition:background .18s ease,padding-left .18s ease;
+}
+.row:hover{background:var(--steel-wash);padding-left:14px}
+.row::after{
+  content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;
+  background:var(--acid);transition:width .28s ease;
+}
+.row:hover::after{width:100%}
+.row h3{font-size:1.32rem;letter-spacing:-.025em;font-weight:500;line-height:1.2}
+.row h3 small{display:block;font-size:14px;color:var(--slate);font-weight:400;margin-top:5px;letter-spacing:0}
+.row .tech{font-size:14px;color:var(--slate)}
+.row .year{font-size:14px;color:var(--slate);font-variant-numeric:tabular-nums}
+.row .open{
+  justify-self:end;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--hair-strong);display:grid;place-items:center;
+  color:var(--slate);transition:.18s ease;
+}
+.row:hover .open{background:var(--steel);border-color:var(--steel);color:#fff}
+.row .open svg{width:15px;height:15px}
+
+/* preview chip that appears on hover */
+.thumb{
+  position:absolute;right:78px;top:50%;transform:translateY(-50%) scale(.96);
+  width:150px;height:96px;border-radius:8px;overflow:hidden;
+  border:1px solid var(--hair-strong);background:#fff;
+  opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;
+}
+.row:hover .thumb{opacity:1;transform:translateY(-50%) scale(1)}
+.thumb .bar{height:14px;background:#EEF1F3;border-bottom:1px solid var(--hair)}
+.thumb .body{height:calc(100% - 14px);display:grid;place-items:center}
+.thumb.zen .body{background:#EDF3E2}
+.thumb.llama .body{background:#E7EEF7}
+.thumb.keh .body{background:#FBEDE6}
+.thumb .glyph{width:34px;height:34px;border-radius:7px}
+.thumb.zen .glyph{background:#7BA83C}
+.thumb.llama .glyph{background:#2D6CA2}
+.thumb.keh .glyph{background:#D9633A}
+
+/* ---------- services ---------- */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+.svc article{background:var(--card);padding:30px 28px 32px}
+.svc h3{font-size:1.08rem;font-weight:500;letter-spacing:-.015em;margin-bottom:9px}
+.svc p{font-size:15px;color:var(--slate);margin-bottom:16px}
+.svc ul{list-style:none;font-size:14.5px;color:var(--slate);display:grid;gap:7px}
+.svc li{padding-left:17px;position:relative}
+.svc li::before{
+  content:"";position:absolute;left:0;top:9px;width:7px;height:7px;
+  border-radius:2px;background:var(--acid);
+}
+.svc .num{font-size:13px;color:var(--slate);display:block;margin-bottom:14px;font-variant-numeric:tabular-nums}
+
+/* ---------- lla.ma ---------- */
+.llama{background:var(--card);border:1px solid var(--hair);border-radius:12px;overflow:hidden}
+.llama .top{padding:clamp(28px,4vw,42px);border-bottom:1px solid var(--hair);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}
+.llama .top h2{margin-bottom:10px}
+.llama .top p{color:var(--slate);max-width:46ch;font-size:16px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;background:var(--acid);color:#2E3D08;padding:5px 12px;border-radius:20px;margin-bottom:16px}
+.repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.repos article{padding:26px 28px;border-right:1px solid var(--hair)}
+.repos article:last-child{border-right:0}
+.repos h3{font-family:var(--mono);font-size:15px;font-weight:500;margin-bottom:9px}
+.repos p{font-size:14.5px;color:var(--slate);margin-bottom:14px}
+.repos a{font-size:14px;font-weight:500;color:var(--steel);border-bottom:1px solid #B9CFE1;padding-bottom:1px}
+.repos a:hover{border-bottom-color:var(--steel)}
+
+/* ---------- contact ---------- */
+.contact{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(28px,6vw,72px);align-items:start}
+.contact h2{margin-bottom:14px}
+.contact p{color:var(--slate);max-width:40ch}
+.links{display:grid;gap:0;border-top:1px solid var(--hair)}
+.links a{display:flex;justify-content:space-between;align-items:center;padding:15px 2px;border-bottom:1px solid var(--hair);font-size:16px}
+.links a span{color:var(--slate);font-size:14px}
+.links a:hover{padding-left:8px;color:var(--steel)}
+.links a{transition:padding-left .16s ease,color .16s ease}
+
+footer{border-top:1px solid var(--hair);padding:26px 0 40px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--slate)}
+
+@media (max-width:880px){
+  .hero .wrap{grid-template-columns:1fr}
+  .rail{border-left:0;border-top:1px solid var(--hair);padding-left:0;padding-top:28px}
+  .row{grid-template-columns:1fr auto;gap:12px}
+  .row .tech,.row .year,.thumb{display:none}
+  .contact{grid-template-columns:1fr}
+  .repos article{border-right:0;border-bottom:1px solid var(--hair)}
+  .llama .top{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#" class="mark">Tony Anglesey<span class="dot"></span></a>
+    <div class="nav-links">
+      <a href="#work" aria-current="true">Work</a>
+      <a href="#services">Services</a>
+      <a href="#llama">lla.ma</a>
+      <a href="#">Writing</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="avail"><i></i> Available for new work, remote or on-site</p>
+      <h1>Tony Anglesey
+        <span class="role">Full-stack engineer and product designer in Chicago and New York.</span>
+      </h1>
+      <p class="lede">Twenty years building software that ships — from <em>Zen Fitness</em>, an AI-assisted trainer platform, to <em>lla.ma</em>, a self-hosted toolchain for people who'd rather own their infrastructure.</p>
+      <div class="actions">
+        <button class="btn">See selected work</button>
+        <button class="btn ghost">Download résumé</button>
+      </div>
+    </div>
+
+    <aside class="rail">
+      <dl>
+        <div>
+          <dt>Currently</dt>
+          <dd>Founder, lla.ma<span>Open-source Postgres and deploy tooling</span></dd>
+        </div>
+        <div>
+          <dt>Focus</dt>
+          <dd>Product engineering<span>Design systems, data-heavy interfaces, AI features</span></dd>
+        </div>
+        <div>
+          <dt>Working with</dt>
+          <dd>
+            <div class="stack">
+              <span>React</span><span>Tailwind</span><span>Supabase</span>
+              <span>Postgres</span><span class="hi">Node</span>
+            </div>
+          </dd>
+        </div>
+      </dl>
+    </aside>
+  </div>
+</header>
+
+<section class="band" id="work">
+  <div class="wrap">
+    <div class="head">
+      <h2>Selected work</h2>
+      <p>Three projects that show the range — consumer product, Web3 data, and enterprise commerce.</p>
+    </div>
+
+    <div class="index">
+      <a class="row" href="#">
+        <h3>Zen Fitness<small>AI-assisted trainer and client platform</small></h3>
+        <p class="tech">React · Tailwind · Supabase</p>
+        <p class="year">2024 — present</p>
+        <span class="open" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M6 3h7v7"/></svg>
+        </span>
+        <div class="thumb zen"><div class="bar"></div><div class="body"><div class="glyph"></div></div></div>
+      </a>
+
+      <a class="row" href="#">
+        <h3>Llama<small>Crypto rewards hub with live token dashboards</small></h3>
+        <p class="tech">React · Firebase · Chart.js</p>
+        <p class="year">2023</p>
+        <span class="open" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M6 3h7v7"/></svg>
+        </span>
+        <div class="thumb llama"><div class="bar"></div><div class="body"><div class="glyph"></div></div></div>
+      </a>
+
+      <a class="row" href="#">
+        <h3>KEH Camera<small>Commerce redesign for a pre-owned gear marketplace</small></h3>
+        <p class="tech">Magento · WordPress · PHP</p>
+        <p class="year">2022</p>
+        <span class="open" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13L13 3M6 3h7v7"/></svg>
+        </span>
+        <div class="thumb keh"><div class="bar"></div><div class="body"><div class="glyph"></div></div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="services">
+  <div class="wrap">
+    <div class="head">
+      <h2>How I can help</h2>
+      <p>Most engagements start as one of these and grow from there.</p>
+    </div>
+
+    <div class="svc">
+      <article>
+        <span class="num">01</span>
+        <h3>Build the product</h3>
+        <p>End-to-end development, from schema to shipped interface.</p>
+        <ul>
+          <li>Full-stack web applications</li>
+          <li>API design and integration</li>
+          <li>Auth, billing, and data modeling</li>
+        </ul>
+      </article>
+      <article>
+        <span class="num">02</span>
+        <h3>Fix the interface</h3>
+        <p>Redesign work for products that grew faster than their UI.</p>
+        <ul>
+          <li>Design systems and component libraries</li>
+          <li>Dashboards and data-heavy screens</li>
+          <li>Accessibility and performance passes</li>
+        </ul>
+      </article>
+      <article>
+        <span class="num">03</span>
+        <h3>Modernize what exists</h3>
+        <p>Move legacy systems forward without a rewrite from zero.</p>
+        <ul>
+          <li>Framework and platform migrations</li>
+          <li>Self-hosting and cloud cost reduction</li>
+          <li>CI/CD and deploy pipelines</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="llama">
+  <div class="wrap">
+    <div class="llama">
+      <div class="top">
+        <div>
+          <span class="pill">Open source</span>
+          <h2>lla.ma</h2>
+          <p>A small suite of self-hosted tools. Build in the open, run it on your own box, keep the data yours.</p>
+        </div>
+        <button class="btn ghost">View on GitHub</button>
+      </div>
+      <div class="repos">
+        <article>
+          <h3>llama-base</h3>
+          <p>An AI-native Postgres console with Supabase Studio's polish, for any database.</p>
+          <a href="#">Read the docs</a>
+        </article>
+        <article>
+          <h3>llama-apps</h3>
+          <p>Git-to-deploy app platform. Push, build, and run on your own infrastructure.</p>
+          <a href="#">Read the docs</a>
+        </article>
+        <article>
+          <h3>llama-cli</h3>
+          <p>Drive the whole suite from a terminal — scriptable and fast.</p>
+          <a href="#">Read the docs</a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contact">
+  <div class="wrap contact">
+    <div>
+      <h2>Let's talk about what you're building</h2>
+      <p>Send a short note about the project and timeline. I reply within a day or two.</p>
+      <div class="actions"><button class="btn">Start a conversation</button></div>
+    </div>
+    <div class="links">
+      <a href="#">Email<span>tony@tonyanglesey.com</span></a>
+      <a href="#">GitHub<span>@tonyanglesey</span></a>
+      <a href="#">LinkedIn<span>in/tonyanglesey</span></a>
+      <a href="#">Résumé<span>PDF, 2 pages</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Tony Anglesey</span>
+    <span>Chicago and New York</span>
+    <span>Built with React, Tailwind, and Supabase</span>
+  </div>
+</footer>
+
+</body>
+</html>
