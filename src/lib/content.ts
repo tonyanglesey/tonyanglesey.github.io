@@ -161,5 +161,5 @@ export const socials = [
   { label: "LinkedIn", value: "in/tonyanglesey", href: "https://linkedin.com/in/tonyanglesey" },
   { label: "X", value: "@tanglesey", href: "https://x.com/tanglesey" },
   { label: "Instagram", value: "@tonyanglesey", href: "https://instagram.com/tonyanglesey" },
-  { label: "Résumé", value: "PDF, 2 pages", href: profile.resumeHref },
+  { label: "Resume", value: "PDF, 2 pages", href: profile.resumeHref },
 ] as const;
