@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { profile } from "@/lib/content";
-import SmoothLink from "./SmoothLink";
+import SmoothLink, { scrollToTop } from "./SmoothLink";
 
 // On-page sections (smooth-scroll, no hash) vs. real routes.
 const sectionLinks = [
@@ -47,7 +47,25 @@ export default function Nav() {
   return (
     <nav className="nav">
       <div className="wrap">
-        <Link href="/" className="mark">
+        <Link
+          href="/"
+          className="mark"
+          onClick={(e) => {
+            // On the home page, smooth-scroll to top without adding a hash.
+            // Elsewhere, let the link navigate home (which lands at the top).
+            if (
+              onHome &&
+              !e.metaKey &&
+              !e.ctrlKey &&
+              !e.shiftKey &&
+              !e.altKey &&
+              e.button === 0
+            ) {
+              e.preventDefault();
+              scrollToTop();
+            }
+          }}
+        >
           {profile.name}
           <span className="dot" />
         </Link>

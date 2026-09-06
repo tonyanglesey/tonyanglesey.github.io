@@ -12,6 +12,13 @@ function prefersReducedMotion() {
   );
 }
 
+export function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: prefersReducedMotion() ? "auto" : "smooth",
+  });
+}
+
 export function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return false;
