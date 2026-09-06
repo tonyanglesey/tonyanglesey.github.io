@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { profile, rail, projects, solutions, llama, socials } from "@/lib/content";
+import SmoothLink from "@/components/site/SmoothLink";
+import ScrollOnLoad from "@/components/site/ScrollOnLoad";
 
 const ArrowGlyph = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -10,6 +11,7 @@ const ArrowGlyph = () => (
 export default function Home() {
   return (
     <>
+      <ScrollOnLoad />
       {/* ---------- hero ---------- */}
       <header className="hero">
         <div className="wrap">
@@ -23,9 +25,9 @@ export default function Home() {
             </h1>
             <p className="lede">{profile.lede}</p>
             <div className="actions">
-              <Link href="#work" className="btn">
+              <SmoothLink targetId="work" className="btn">
                 See selected work
-              </Link>
+              </SmoothLink>
               <a href={profile.resumeHref} className="btn ghost" download>
                 Download résumé
               </a>

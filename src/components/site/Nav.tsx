@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { profile } from "@/lib/content";
+import SmoothLink from "./SmoothLink";
 
-const links = [
-  { label: "Work", href: "/#work" },
-  { label: "Solutions", href: "/#solutions" },
-  { label: "lla.ma", href: "/#llama" },
-  { label: "Writing", href: "/blog/" },
+// On-page sections (smooth-scroll, no hash) vs. real routes.
+const sectionLinks = [
+  { label: "Work", targetId: "work" },
+  { label: "Solutions", targetId: "solutions" },
+  { label: "lla.ma", targetId: "llama" },
 ];
 
 export default function Nav() {
@@ -17,15 +18,16 @@ export default function Nav() {
           <span className="dot" />
         </Link>
         <div className="nav-links">
-          {links.map((l) => (
-            <Link key={l.href} href={l.href}>
+          {sectionLinks.map((l) => (
+            <SmoothLink key={l.targetId} targetId={l.targetId}>
               {l.label}
-            </Link>
+            </SmoothLink>
           ))}
+          <Link href="/blog/">Writing</Link>
         </div>
-        <Link href="/#contact" className="nav-cta">
+        <SmoothLink targetId="contact" className="nav-cta">
           Get in touch
-        </Link>
+        </SmoothLink>
       </div>
     </nav>
   );
