@@ -204,6 +204,10 @@ a {
   color: var(--ink);
   border-bottom-color: var(--acid);
 }
+.nav-links a[aria-current] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
 .nav-cta {
   font-size: 15px;
   font-weight: 500;
