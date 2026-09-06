@@ -32,10 +32,12 @@ export function scrollToId(id: string) {
 export default function SmoothLink({
   targetId,
   className,
+  active,
   children,
 }: {
   targetId: string;
   className?: string;
+  active?: boolean;
   children: ReactNode;
 }) {
   const router = useRouter();
@@ -54,7 +56,12 @@ export default function SmoothLink({
   }
 
   return (
-    <a href={`/#${targetId}`} onClick={onClick} className={className}>
+    <a
+      href={`/#${targetId}`}
+      onClick={onClick}
+      className={className}
+      aria-current={active ? "true" : undefined}
+    >
       {children}
     </a>
   );
