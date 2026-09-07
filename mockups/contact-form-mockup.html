@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact form — design exploration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f7f8;--card:#fff;--ink:#15202e;--slate:#5d6875;
+  --hair:#e2e5e9;--hair-strong:#cbd1d8;--steel:#1f5c8b;--steel-deep:#16456b;
+  --steel-wash:#edf3f9;--moss:#5c8a1c;--acid:#c9f04b;--chip:#eef1f3;--chip-ink:#3c4753;
+  --sans:"Instrument Sans",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:44px 24px 80px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--steel);outline-offset:2px;border-radius:4px}
+
+/* explainer header */
+.doc-head{margin-bottom:30px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--slate)}
+.doc-head h1{font-size:1.9rem;letter-spacing:-.03em;font-weight:600;margin:8px 0 6px;line-height:1.1}
+.doc-head p{color:var(--slate);font-size:15px;max-width:60ch}
+
+/* approach toggle */
+.toggle{display:inline-flex;background:var(--chip);border-radius:9px;padding:4px;gap:4px;margin:22px 0 8px}
+.toggle button{font-family:inherit;font-size:14px;font-weight:500;color:var(--slate);background:transparent;border:0;padding:8px 16px;border-radius:6px;cursor:pointer;transition:.15s}
+.toggle button[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(21,32,46,.1)}
+.note{font-size:13.5px;color:var(--slate);margin:14px 2px 26px;padding-left:13px;border-left:2px solid var(--acid)}
+
+/* card + form */
+.card{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:clamp(24px,4vw,38px)}
+.card h2{font-size:1.5rem;letter-spacing:-.03em;font-weight:600;margin-bottom:6px}
+.card .sub{color:var(--slate);font-size:15px;margin-bottom:26px}
+.field{margin-bottom:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:6px}
+label .opt{font-weight:400;color:var(--hair-strong)}
+input,textarea,select{
+  font-family:inherit;font-size:15px;color:var(--ink);width:100%;
+  background:var(--paper);border:1px solid var(--hair-strong);border-radius:8px;
+  padding:11px 13px;transition:border-color .15s,box-shadow .15s;
+}
+textarea{resize:vertical;min-height:104px}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--steel);box-shadow:0 0 0 3px var(--steel-wash);background:var(--card)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%235d6875' stroke-width='1.5'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+
+.btn{font-family:inherit;font-size:15px;font-weight:500;padding:12px 22px;border-radius:8px;border:1px solid var(--steel);background:var(--steel);color:#fff;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--steel-deep);border-color:var(--steel-deep)}
+.btn.full{width:100%}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--hair-strong)}
+.btn.ghost:hover{border-color:var(--steel);color:var(--steel);background:var(--steel-wash)}
+.honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* divider + progressive block */
+.rule{height:1px;background:var(--hair);margin:26px 0}
+.disclose{display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none;padding:4px 0}
+.disclose .chev{width:20px;height:20px;flex:none;display:grid;place-items:center;border:1px solid var(--hair-strong);border-radius:6px;transition:.2s;color:var(--slate)}
+.disclose[aria-expanded="true"] .chev{transform:rotate(90deg);background:var(--steel);border-color:var(--steel);color:#fff}
+.disclose strong{font-size:15px;font-weight:500}
+.disclose span{font-size:13px;color:var(--slate)}
+.project{overflow:hidden;max-height:0;opacity:0;transition:max-height .35s ease,opacity .3s ease,margin .3s ease}
+.project.open{max-height:1200px;opacity:1;margin-top:22px}
+
+/* stage segmented control */
+.seg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:560px){.seg{grid-template-columns:repeat(4,1fr)}}
+.seg button{font-family:inherit;font-size:13.5px;font-weight:500;color:var(--slate);background:var(--paper);border:1px solid var(--hair-strong);border-radius:9px;padding:12px 8px;cursor:pointer;text-align:center;transition:.15s;line-height:1.25}
+.seg button:hover{border-color:var(--steel)}
+.seg button[aria-pressed="true"]{background:var(--steel-wash);border-color:var(--steel);color:var(--steel-deep)}
+.stage-hint{margin-top:12px;font-size:13.5px;color:var(--slate);background:var(--chip);border-radius:9px;padding:12px 14px;display:none}
+.stage-hint.show{display:block}
+.stage-hint b{color:var(--ink);font-weight:600}
+
+/* two-form chooser */
+.chooser{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:560px){.chooser{grid-template-columns:1fr 1fr}}
+.choice{text-align:left;background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:26px 24px;cursor:pointer;transition:.16s;font-family:inherit}
+.choice:hover{border-color:var(--steel);background:var(--steel-wash);transform:translateY(-2px)}
+.choice .ico{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;margin-bottom:14px}
+.choice.a .ico{background:var(--chip);color:var(--ink)}
+.choice.b .ico{background:var(--acid);color:#2e3d08}
+.choice h3{font-size:1.1rem;font-weight:600;letter-spacing:-.02em;margin-bottom:5px}
+.choice p{font-size:13.5px;color:var(--slate)}
+.choice .meta{margin-top:14px;font-size:12px;color:var(--slate);font-family:var(--mono)}
+.back{font-size:13.5px;color:var(--steel);background:none;border:0;cursor:pointer;font-family:inherit;padding:0;margin-bottom:18px;display:inline-flex;gap:6px;align-items:center}
+
+/* success */
+.done{text-align:center;padding:30px 10px}
+.done .ok{width:46px;height:46px;border-radius:50%;background:var(--moss);color:#fff;display:grid;place-items:center;margin:0 auto 16px}
+.done h3{font-size:1.25rem;font-weight:600;margin-bottom:6px;letter-spacing:-.02em}
+.done p{color:var(--slate);font-size:14.5px}
+.hide{display:none!important}
+.pane{display:none}
+.pane.active{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="doc-head">
+    <div class="kicker">Design exploration · not wired up</div>
+    <h1>Contact form — two directions</h1>
+    <p>Same job, two shapes. Flip between them and click through — the forms are interactive (submit shows the static-site “thanks” state), nothing actually sends.</p>
+    <div class="toggle" role="tablist" aria-label="Approach">
+      <button role="tab" aria-selected="true" data-pane="adaptive">Adaptive (one form)</button>
+      <button role="tab" aria-selected="false" data-pane="twoforms">Two separate forms</button>
+    </div>
+  </div>
+
+  <!-- ============ APPROACH A: ADAPTIVE ============ -->
+  <section class="pane active" id="adaptive">
+    <p class="note"><b>Recommended.</b> Everyone gets a 20-second message box. The optional “project” block expands only if they want it — and how much they fill in <em>is</em> the qualification signal. No upfront choice to make.</p>
+    <div class="card" id="adaptiveCard">
+      <h2>Let’s talk about what you’re building</h2>
+      <p class="sub">Send a short note about the project and timeline. I reply within a day or two.</p>
+      <form onsubmit="return showDone(this,'adaptiveCard')">
+        <div class="row">
+          <div class="field"><label>Name</label><input required placeholder="Jane Doe"></div>
+          <div class="field"><label>Email</label><input type="email" required placeholder="jane@company.com"></div>
+        </div>
+        <div class="field"><label>Message</label><textarea required placeholder="A sentence or two about what you have in mind…"></textarea></div>
+
+        <div class="rule"></div>
+
+        <div class="disclose" id="discloseBtn" role="button" tabindex="0" aria-expanded="false" onclick="toggleProject()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleProject()}">
+          <span class="chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4.5 3L7.5 6L4.5 9"/></svg></span>
+          <span><strong>Tell me about your project</strong> &nbsp;<span>optional — helps me reply with the right next step</span></span>
+        </div>
+
+        <div class="project" id="projectBlock">
+          <div class="field">
+            <label>Where are you in the process?</label>
+            <div class="seg" id="stageSeg">
+              <button type="button" onclick="pickStage(this,0)" aria-pressed="false">Just an idea</button>
+              <button type="button" onclick="pickStage(this,1)" aria-pressed="false">Have designs</button>
+              <button type="button" onclick="pickStage(this,2)" aria-pressed="false">Existing product</button>
+              <button type="button" onclick="pickStage(this,3)" aria-pressed="false">Not sure yet</button>
+            </div>
+            <div class="stage-hint" id="stageHint"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Project type</label>
+              <select><option value="">Select…</option><option>Web app</option><option>Mobile app</option><option>Redesign / UI</option><option>API / backend</option><option>Something else</option></select>
+            </div>
+            <div class="field"><label>Timeline</label>
+              <select><option value="">Select…</option><option>ASAP</option><option>1–3 months</option><option>3–6 months</option><option>Just exploring</option></select>
+            </div>
+          </div>
+          <div class="field"><label>Budget range <span class="opt">(optional)</span></label>
+            <select><option value="">Prefer not to say</option><option>&lt; $10k</option><option>$10k–$25k</option><option>$25k–$50k</option><option>$50k+</option></select>
+          </div>
+          <div class="field"><label>Anything else <span class="opt">(optional)</span></label><textarea placeholder="Links, context, must-haves…"></textarea></div>
+        </div>
+
+        <input class="honeypot" tabindex="-1" autocomplete="off" name="_gotcha" aria-hidden="true">
+        <div style="margin-top:22px"><button class="btn full" type="submit">Send message</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ APPROACH B: TWO FORMS ============ -->
+  <section class="pane" id="twoforms">
+    <p class="note">A clear fork up front: a fast “say hi” path and a deliberate “start a project” path. More explicit, but it asks people to categorize themselves before they’ve typed anything.</p>
+
+    <div id="chooser" class="chooser">
+      <button class="choice a" onclick="chooseForm('quick')">
+        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <h3>Quick message</h3>
+        <p>Just saying hi, a question, or a quick intro. Three fields, done.</p>
+        <div class="meta">name · email · message</div>
+      </button>
+      <button class="choice b" onclick="chooseForm('project')">
+        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg></span>
+        <h3>Start a project</h3>
+        <p>You’ve got something to build. Share the details and where you’re at.</p>
+        <div class="meta">+ stage · type · timeline · budget</div>
+      </button>
+    </div>
+
+    <div class="card hide" id="quickForm">
+      <button class="back" onclick="resetChooser()">← Back</button>
+      <h2>Quick message</h2>
+      <p class="sub">I reply within a day or two.</p>
+      <form onsubmit="return showDone(this,'quickForm')">
+        <div class="row"><div class="field"><label>Name</label><input required placeholder="Jane Doe"></div><div class="field"><label>Email</label><input type="email" required placeholder="jane@company.com"></div></div>
+        <div class="field"><label>Message</label><textarea required placeholder="What’s on your mind?"></textarea></div>
+        <input class="honeypot" tabindex="-1" autocomplete="off" name="_gotcha" aria-hidden="true">
+        <div style="margin-top:22px"><button class="btn full" type="submit">Send</button></div>
+      </form>
+    </div>
+
+    <div class="card hide" id="projectForm">
+      <button class="back" onclick="resetChooser()">← Back</button>
+      <h2>Start a project</h2>
+      <p class="sub">The more you share, the sharper my first reply.</p>
+      <form onsubmit="return showDone(this,'projectForm')">
+        <div class="row"><div class="field"><label>Name</label><input required placeholder="Jane Doe"></div><div class="field"><label>Email</label><input type="email" required placeholder="jane@company.com"></div></div>
+        <div class="field">
+          <label>Where are you in the process?</label>
+          <div class="seg"><button type="button" onclick="pickStage(this,0)" aria-pressed="false">Just an idea</button><button type="button" onclick="pickStage(this,1)" aria-pressed="false">Have designs</button><button type="button" onclick="pickStage(this,2)" aria-pressed="false">Existing product</button><button type="button" onclick="pickStage(this,3)" aria-pressed="false">Not sure yet</button></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Project type</label><select><option value="">Select…</option><option>Web app</option><option>Mobile app</option><option>Redesign / UI</option><option>API / backend</option><option>Something else</option></select></div>
+          <div class="field"><label>Timeline</label><select><option value="">Select…</option><option>ASAP</option><option>1–3 months</option><option>3–6 months</option><option>Just exploring</option></select></div>
+        </div>
+        <div class="field"><label>Budget range <span class="opt">(optional)</span></label><select><option value="">Prefer not to say</option><option>&lt; $10k</option><option>$10k–$25k</option><option>$25k–$50k</option><option>$50k+</option></select></div>
+        <div class="field"><label>Project details</label><textarea required placeholder="What are you building, and what does success look like?"></textarea></div>
+        <input class="honeypot" tabindex="-1" autocomplete="off" name="_gotcha" aria-hidden="true">
+        <div style="margin-top:22px"><button class="btn full" type="submit">Send project brief</button></div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<script>
+const HINTS=[
+  "<b>Just an idea:</b> I’ll reply with a few scoping questions and a rough shape for how to start.",
+  "<b>Have designs:</b> great — I’ll ask to see them and talk build approach and estimate.",
+  "<b>Existing product:</b> I’ll ask for access/repo context and where it hurts most.",
+  "<b>Not sure yet:</b> no problem — a short call to figure out the right first step."
+];
+// approach toggle
+document.querySelectorAll('.toggle button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle button').forEach(x=>x.setAttribute('aria-selected', x===b));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active', p.id===b.dataset.pane));
+}));
+// adaptive progressive disclosure
+function toggleProject(){
+  const btn=document.getElementById('discloseBtn'), block=document.getElementById('projectBlock');
+  const open=btn.getAttribute('aria-expanded')==='true';
+  btn.setAttribute('aria-expanded', String(!open));
+  block.classList.toggle('open', !open);
+}
+// stage select (shared)
+function pickStage(el,i){
+  const group=el.closest('.seg');
+  group.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===el));
+  const hint=document.getElementById('stageHint');
+  if(hint && group.id==='stageSeg'){ hint.innerHTML=HINTS[i]; hint.classList.add('show'); }
+}
+// two-form chooser
+function chooseForm(which){
+  document.getElementById('chooser').classList.add('hide');
+  document.getElementById('quickForm').classList.toggle('hide', which!=='quick');
+  document.getElementById('projectForm').classList.toggle('hide', which!=='project');
+}
+function resetChooser(){
+  document.getElementById('chooser').classList.remove('hide');
+  document.getElementById('quickForm').classList.add('hide');
+  document.getElementById('projectForm').classList.add('hide');
+}
+// fake submit -> success state (demonstrates static-site "thanks" UX)
+function showDone(form,cardId){
+  const card=document.getElementById(cardId);
+  card.innerHTML='<div class="done"><div class="ok"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div><h3>Thanks — message sent</h3><p>I’ll get back to you within a day or two.</p></div>';
+  return false;
+}
+</script>
+</body>
+</html>

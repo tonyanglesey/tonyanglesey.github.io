@@ -1,6 +1,7 @@
 import { profile, rail, projects, solutions, llama, socials } from "@/lib/content";
 import SmoothLink from "@/components/site/SmoothLink";
 import ScrollOnLoad from "@/components/site/ScrollOnLoad";
+import ContactForm from "@/components/site/ContactForm";
 
 const ArrowGlyph = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -174,19 +175,15 @@ export default function Home() {
               Send a short note about the project and timeline. I reply within a
               day or two.
             </p>
-            <div className="actions">
-              <a className="btn" href={`mailto:${profile.email}`}>
-                Start a conversation
-              </a>
-            </div>
+            <ContactForm />
           </div>
           <div className="links">
             {socials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                target={s.href.startsWith("https") ? "_blank" : undefined}
+                rel={s.href.startsWith("https") ? "noopener noreferrer" : undefined}
               >
                 {s.label}
                 <span>{s.value}</span>

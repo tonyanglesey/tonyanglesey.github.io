@@ -155,6 +155,14 @@ export const llama = {
   ],
 } as const;
 
+// The contact form POSTs JSON here (same contract the old site used:
+// POST /api/contact, Content-Type: application/json) and the endpoint emails
+// you via Resend. GitHub Pages is static and can't run this itself, so it must
+// be an external function (Vercel, Cloudflare Worker, or llama-api) whose CORS
+// allows https://tonyanglesey.github.io. Leave empty and the form shows a
+// "not connected yet" message instead of failing silently.
+export const contactEndpoint = "https://api.lla.ma/api/email/contact";
+
 export const socials = [
   // { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
   { label: "GitHub", value: "@tonyanglesey", href: "https://github.com/tonyanglesey" },
