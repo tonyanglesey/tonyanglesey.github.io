@@ -854,3 +854,155 @@ h2.section-title {
 .article-body {
   margin-top: 34px;
 }
+
+/* ===========================================================================
+   Contact form (adaptive) — scoped under .cform so generic names (.row/.field)
+   don't collide with the work index. Ported from the v2-blue form mockup.
+=========================================================================== */
+.btn.full { width: 100%; }
+
+.cform { margin-top: 4px; }
+.cform-field { margin-bottom: 16px; }
+.cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cform label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+.cform-opt { font-weight: 400; color: var(--hair-strong); }
+.cform input,
+.cform textarea,
+.cform select {
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid var(--hair-strong);
+  border-radius: 8px;
+  padding: 11px 13px;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.cform textarea { resize: vertical; min-height: 104px; }
+.cform input:focus,
+.cform textarea:focus,
+.cform select:focus {
+  outline: 0;
+  border-color: var(--steel);
+  box-shadow: 0 0 0 3px var(--steel-wash);
+  background: var(--card);
+}
+.cform select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%235d6875' stroke-width='1.5'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 34px;
+}
+.cform-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.cform-rule { height: 1px; background: var(--hair); margin: 24px 0; }
+
+/* progressive disclosure */
+.cform-disclose {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  text-align: left;
+  color: var(--ink);
+}
+.cform-chev {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--hair-strong);
+  border-radius: 6px;
+  transition: 0.2s;
+  color: var(--slate);
+}
+.cform-disclose[aria-expanded="true"] .cform-chev {
+  transform: rotate(90deg);
+  background: var(--steel);
+  border-color: var(--steel);
+  color: #fff;
+}
+.cform-disclose strong { font-size: 15px; font-weight: 500; }
+.cform-optnote { font-size: 13px; color: var(--slate); font-weight: 400; }
+.cform-project {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+.cform-project.open { max-height: 1400px; opacity: 1; margin-top: 22px; }
+
+/* stage segmented control */
+.cform-seg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+@media (min-width: 560px) { .cform-seg { grid-template-columns: repeat(4, 1fr); } }
+.cform-seg button {
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--slate);
+  background: var(--paper);
+  border: 1px solid var(--hair-strong);
+  border-radius: 9px;
+  padding: 12px 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.15s;
+  line-height: 1.25;
+}
+.cform-seg button:hover { border-color: var(--steel); }
+.cform-seg button[aria-pressed="true"] {
+  background: var(--steel-wash);
+  border-color: var(--steel);
+  color: var(--steel-deep);
+}
+.cform-hint {
+  margin-top: 12px;
+  font-size: 13.5px;
+  color: var(--slate);
+  background: var(--chip);
+  border-radius: 9px;
+  padding: 12px 14px;
+}
+.cform-hint b { color: var(--ink); font-weight: 600; }
+
+.cform-error {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #a23b2f;
+  background: #fbecea;
+  border-radius: 8px;
+  padding: 11px 14px;
+}
+.cform-submit { margin-top: 22px; }
+
+/* success state */
+.cform-done { text-align: center; padding: 28px 10px; }
+.cform-ok {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--moss);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+}
+.cform-done h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.02em; }
+.cform-done p { color: var(--slate); font-size: 14.5px; }
+
+@media (max-width: 560px) {
+  .cform-row { grid-template-columns: 1fr; }
+}
