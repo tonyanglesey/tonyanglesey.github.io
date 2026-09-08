@@ -44,7 +44,7 @@ export const projects: Project[] = [
     blurb: "AI-powered trainer & client dashboard with real-time fitness insights",
     tech: "React · JavaScript · Tailwind · Supabase",
     year: "2024 — present",
-    href: "https://github.com/tonyanglesey",
+    href: "https://zenfitness.com",
     image: "/work/zen-fitness.png",
     tint: "#edf3e2",
   },
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     blurb: "Developer infrastructure for AI agents — used by solo builders, teams, and enterprises alike.",
     tech: "NextJS · Bootstrap · JavaScript · Chart.js",
     year: "2026",
-    href: "https://github.com/tonyanglesey/llama",
+    href: "https://lla.ma",
     image: "/work/llama.png",
     tint: "#e7eef7",
   },
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     blurb: "UI/UX-focused e-commerce redesign for certified pre-owned gear",
     tech: "WordPress · Adobe Commerce (Magento) · PHP",
     year: "2022",
-    href: "https://github.com/tonyanglesey",
+    href: "https://keh.com",
     image: "/work/keh.png",
     tint: "#fbede6",
   },
@@ -133,24 +133,24 @@ export const llama = {
   title: "lla.ma",
   blurb:
     "A small suite of self-hosted tools. Build in the open, run it on your own box, keep the data yours.",
-  github: "https://github.com/tonyanglesey/llama",
+  github: "https://github.com/tonyanglesey",
   repos: [
     {
       name: "llama-base",
       blurb:
         "An AI-native Postgres console with Supabase Studio's polish, for any database.",
-      href: "https://github.com/tonyanglesey/llama",
+      href: "https://github.com/tonyanglesey/llama-base",
     },
     {
       name: "llama-apps",
       blurb:
         "Git-to-deploy app platform. Push, build, and run on your own infrastructure.",
-      href: "https://github.com/tonyanglesey/llama",
+      href: "https://github.com/tonyanglesey/llama-apps",
     },
     {
       name: "llama-cli",
       blurb: "Drive the whole suite from a terminal — scriptable and fast.",
-      href: "https://github.com/tonyanglesey/llama",
+      href: "https://github.com/tonyanglesey/llama-cli",
     },
   ],
 } as const;
