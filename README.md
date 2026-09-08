@@ -7,5 +7,5 @@ Pages.
 ## Stack
 
 - Next.js 16 (static HTML/JS, no server at runtime)
-- Tailwind v4 + a small design-token layer in `src/app/globals.css`
+- Tailwind v4 + a small design-token layer
 - Fonts: Instrument Sans + JetBrains Mono via `next/font`
