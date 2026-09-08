@@ -30,7 +30,7 @@ export default function Home() {
                 See selected work
               </SmoothLink>
               <a href={profile.resumeHref} className="btn ghost" download>
-                Download résumé
+                Download resume
               </a>
             </div>
           </div>
